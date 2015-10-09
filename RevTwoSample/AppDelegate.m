@@ -20,8 +20,7 @@
     
     
     //add your RevTwo product key here
-    R2Initialize(@"ADD YOUR KEY HERE", @"2.1", YES);
-    
+    R2Initialize(@"ADD YOUR KEY HERE", @"2.1", YES);    
     
     //Adding files for file browser
     BOOL success;
@@ -67,6 +66,12 @@
     success = [fileManager fileExistsAtPath:filePath];
     if (!success) {
         NSString *path = [[NSBundle mainBundle] pathForResource:@"sample" ofType:@"pdf"];
+        success = [fileManager copyItemAtPath:path toPath:filePath error:&error];
+    }
+    filePath = [documentsDirectory stringByAppendingPathComponent:@"sample.db"];
+    success = [fileManager fileExistsAtPath:filePath];
+    if (!success) {
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"sample" ofType:@"db"];
         success = [fileManager copyItemAtPath:path toPath:filePath error:&error];
     }
     

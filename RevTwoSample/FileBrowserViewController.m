@@ -22,6 +22,9 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     self.filePathsArray = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:documentsDirectory  error:nil];
+    NSMutableArray *tempListing = [NSMutableArray arrayWithArray:self.filePathsArray];
+    [tempListing removeObject:@"revtwo.db"];
+    self.filePathsArray = tempListing;
     
     UIBarButtonItem *refresh = [[UIBarButtonItem alloc] initWithTitle:@"refresh" style:UIBarButtonItemStylePlain target:self action:@selector(refreshTableView)];
     self.navigationItem.rightBarButtonItem = refresh;
@@ -43,12 +46,14 @@
 */
 
 -(void) refreshTableView{
-    NSLog(@"refresh time!!");
     
     //get files
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     self.filePathsArray = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:documentsDirectory  error:nil];
+    NSMutableArray *tempListing = [NSMutableArray arrayWithArray:self.filePathsArray];
+    [tempListing removeObject:@"revtwo.db"];
+    self.filePathsArray = tempListing;
     
     //refresh table
     [self.tableview reloadData];

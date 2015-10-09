@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		051EC38A1BC85ED400EED211 /* sample.db in Resources */ = {isa = PBXBuildFile; fileRef = D832736A1BACBADD005DA1C6 /* sample.db */; settings = {ASSET_TAGS = (); }; };
 		7B4AC1928F1D3ED4C1FA63A7 /* libPods-RevTwoSample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3739DD56CD9A1A1DF98F16EE /* libPods-RevTwoSample.a */; };
 		D85604E31BC4170E00057EC2 /* librevtwo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D85604E21BC4170E00057EC2 /* librevtwo.a */; settings = {ASSET_TAGS = (); }; };
 		D88304AC1B95F3F8007ABDAC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D88304AB1B95F3F8007ABDAC /* main.m */; };
@@ -306,6 +307,7 @@
 				D88304B71B95F3F8007ABDAC /* Images.xcassets in Resources */,
 				D88304F31B9617FF007ABDAC /* logo_black_sm.png in Resources */,
 				D88304E81B95F521007ABDAC /* tiger.jpg in Resources */,
+				051EC38A1BC85ED400EED211 /* sample.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
