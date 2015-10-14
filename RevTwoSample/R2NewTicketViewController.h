@@ -16,5 +16,8 @@
 @property UITextField *phoneField;
 @property UITextView *descriptionField;
 @property UIBarButtonItem *submitButton;
+//existing ticket
+@property UILabel *hasTicketLabel;
+@property UIBarButtonItem *closeButton;
 
 @end
