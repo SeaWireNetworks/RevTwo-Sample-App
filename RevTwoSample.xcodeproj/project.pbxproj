@@ -10,6 +10,7 @@
 		051EC38A1BC85ED400EED211 /* sample.db in Resources */ = {isa = PBXBuildFile; fileRef = D832736A1BACBADD005DA1C6 /* sample.db */; settings = {ASSET_TAGS = (); }; };
 		7B4AC1928F1D3ED4C1FA63A7 /* libPods-RevTwoSample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3739DD56CD9A1A1DF98F16EE /* libPods-RevTwoSample.a */; };
 		D85604E31BC4170E00057EC2 /* librevtwo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D85604E21BC4170E00057EC2 /* librevtwo.a */; settings = {ASSET_TAGS = (); }; };
+		D85F846C1BCFED950079D75B /* catalog.db in Resources */ = {isa = PBXBuildFile; fileRef = D85F846B1BCFEC160079D75B /* catalog.db */; settings = {ASSET_TAGS = (); }; };
 		D88304AC1B95F3F8007ABDAC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D88304AB1B95F3F8007ABDAC /* main.m */; };
 		D88304AF1B95F3F8007ABDAC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D88304AE1B95F3F8007ABDAC /* AppDelegate.m */; };
 		D88304B51B95F3F8007ABDAC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D88304B31B95F3F8007ABDAC /* Main.storyboard */; };
@@ -47,6 +48,7 @@
 		D832736A1BACBADD005DA1C6 /* sample.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample.db; sourceTree = "<group>"; };
 		D8438A381BBC23A500857907 /* Revtwo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Revtwo.h; sourceTree = "<group>"; };
 		D85604E21BC4170E00057EC2 /* librevtwo.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = librevtwo.a; sourceTree = "<group>"; };
+		D85F846B1BCFEC160079D75B /* catalog.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = catalog.db; sourceTree = "<group>"; };
 		D88304A61B95F3F8007ABDAC /* RevTwoSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RevTwoSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D88304AA1B95F3F8007ABDAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D88304AB1B95F3F8007ABDAC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 				D88304E11B95F521007ABDAC /* sample.pdf */,
 				D88304E21B95F521007ABDAC /* tiger.jpg */,
 				D832736A1BACBADD005DA1C6 /* sample.db */,
+				D85F846B1BCFEC160079D75B /* catalog.db */,
 			);
 			name = Files;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D88304EA1B95F533007ABDAC /* logo_white.png in Resources */,
+				D85F846C1BCFED950079D75B /* catalog.db in Resources */,
 				D88304B51B95F3F8007ABDAC /* Main.storyboard in Resources */,
 				D88304E41B95F521007ABDAC /* macaw.jpg in Resources */,
 				D88304E51B95F521007ABDAC /* mountain.jpg in Resources */,
