@@ -1,6 +1,6 @@
 ![RevTwo Logo](logo.png)
 
-This Sample App demonstrates many of the key features of the RevTwo In-App Support Platform.   The application provides a very simple user interface that highlights the working features of the platform and shows various RevTwo API calls in action.   Included in this sample are:
+This Sample App demonstrates many of the key features of the RevTwo In-App Support Platform.   The application provides a very simple user interface that highlights the features of the platform and shows various RevTwo API calls in action.   Included in this sample are:
 
 1. **Ticket Creation**:  RevTwo help requests are managed by tickets.   When a user requests help, a ticket is created that can be viewed on the Web UI.    Tickets can be created using the built-in form in the RevTwo library or via your own view utilizing the API calls directly.
 2. **Screen Sharing**:  The RevTwo library provides automatic support for screen sharing within your application.   Screen sharing is built into the library and does not require any API calls to activate.  
