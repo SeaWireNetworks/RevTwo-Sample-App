@@ -61,12 +61,13 @@
     cell.textLabel.text = [self.tutorials objectAtIndex:indexPath.row];
     return cell;
 }
+
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *tutorial = [self.tutorials objectAtIndex:indexPath.row];
     
     //Logging
     if ([tutorial isEqualToString:@"Logging"]) {
-        //LoggingViewController *vc = [[LoggingViewController alloc]init];
         LoggingViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"Logging"];
         [self.navigationController pushViewController:vc animated:YES];
     }
@@ -84,8 +85,6 @@
     
     //newTicket
     else if ([tutorial isEqualToString:@"Create New Ticket"]){
-        //NewTicketViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"newTicket"];
-        //[self.navigationController pushViewController:vc animated:YES];
         R2NewTicketViewController *vc = [[R2NewTicketViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
         
