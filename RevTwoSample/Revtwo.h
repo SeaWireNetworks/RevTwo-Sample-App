@@ -13,7 +13,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 #import <Foundation/Foundation.h>
 
-void R2Initialize(NSString *productKey, NSString *version, BOOL alwaysOn);
+void R2Initialize(NSString *productKey, BOOL alwaysOn);
 
 void R2Log(NSString *format, ...);
 void R2Error(NSString *format, ...);
@@ -23,6 +23,7 @@ void R2Trace(NSString *format, ...);
 
 bool R2IsTicketOpen();
 void R2OpenTicket(NSString *text, NSString *name, NSString *email, NSString *phone);
+void R2CloseTicket();
 
 @interface Revtwo : NSObject
 
