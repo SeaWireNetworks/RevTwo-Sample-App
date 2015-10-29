@@ -27,6 +27,7 @@
                       @"SQLite Database",
                       //@"Chat",
                       @"Create New Ticket", nil];
+    self.pickedTutorial = NO;
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -34,7 +35,10 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
-
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    self.pickedTutorial = NO;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -65,30 +69,33 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *tutorial = [self.tutorials objectAtIndex:indexPath.row];
-    
-    //Logging
-    if ([tutorial isEqualToString:@"Logging"]) {
-        LoggingViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"Logging"];
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    //FileBrowser
-    else if ([tutorial isEqualToString:@"File Browsing"]) {
-        FileBrowserViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"FileBrowser"];
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    
-    //DatabaseBrowser
-    else if ([tutorial isEqualToString:@"SQLite Database"]) {
-        SQLiteBrowserViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"DatabaseBrowser"];
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    
-    //newTicket
-    else if ([tutorial isEqualToString:@"Create New Ticket"]){
-        R2NewTicketViewController *vc = [[R2NewTicketViewController alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];
+    if (!self.pickedTutorial) {
+        self.pickedTutorial = YES;
+        //Logging
+        if ([tutorial isEqualToString:@"Logging"]) {
+            LoggingViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"Logging"];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        //FileBrowser
+        else if ([tutorial isEqualToString:@"File Browsing"]) {
+            FileBrowserViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"FileBrowser"];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
         
+        //DatabaseBrowser
+        else if ([tutorial isEqualToString:@"SQLite Database"]) {
+            SQLiteBrowserViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"DatabaseBrowser"];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        
+        //newTicket
+        else if ([tutorial isEqualToString:@"Create New Ticket"]){
+            R2NewTicketViewController *vc = [[R2NewTicketViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
     }
+    
 }
 
 /*

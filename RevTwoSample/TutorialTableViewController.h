@@ -15,5 +15,6 @@
 @interface TutorialTableViewController : UITableViewController
 
 @property NSArray *tutorials;
+@property BOOL pickedTutorial;
 
 @end

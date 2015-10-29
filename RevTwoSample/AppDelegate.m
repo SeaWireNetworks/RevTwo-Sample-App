@@ -30,34 +30,37 @@
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
     NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    NSString *imagesPath = [documentsDirectory stringByAppendingPathComponent:@"/images"];
     NSString *filePath;
     
+    if (![[NSFileManager defaultManager] fileExistsAtPath:imagesPath])
+        [[NSFileManager defaultManager] createDirectoryAtPath:imagesPath withIntermediateDirectories:NO attributes:nil error:&error];
     
-    filePath = [documentsDirectory stringByAppendingPathComponent:@"bear.jpg"];
+    filePath = [imagesPath stringByAppendingPathComponent:@"bear.jpg"];
     success = [fileManager fileExistsAtPath:filePath];
     if (!success) {
         NSString *path = [[NSBundle mainBundle] pathForResource:@"bear" ofType:@"jpg"];
         success = [fileManager copyItemAtPath:path toPath:filePath error:&error];
     }
-    filePath = [documentsDirectory stringByAppendingPathComponent:@"macaw.jpg"];
+    filePath = [imagesPath stringByAppendingPathComponent:@"macaw.jpg"];
     success = [fileManager fileExistsAtPath:filePath];
     if (!success) {
         NSString *path = [[NSBundle mainBundle] pathForResource:@"macaw" ofType:@"jpg"];
         success = [fileManager copyItemAtPath:path toPath:filePath error:&error];
     }
-    filePath = [documentsDirectory stringByAppendingPathComponent:@"mountain.jpg"];
+    filePath = [imagesPath stringByAppendingPathComponent:@"mountain.jpg"];
     success = [fileManager fileExistsAtPath:filePath];
     if (!success) {
         NSString *path = [[NSBundle mainBundle] pathForResource:@"mountain" ofType:@"jpg"];
         success = [fileManager copyItemAtPath:path toPath:filePath error:&error];
     }
-    filePath = [documentsDirectory stringByAppendingPathComponent:@"reef.jpg"];
+    filePath = [imagesPath stringByAppendingPathComponent:@"reef.jpg"];
     success = [fileManager fileExistsAtPath:filePath];
     if (!success) {
         NSString *path = [[NSBundle mainBundle] pathForResource:@"reef" ofType:@"jpg"];
         success = [fileManager copyItemAtPath:path toPath:filePath error:&error];
     }
-    filePath = [documentsDirectory stringByAppendingPathComponent:@"tiger.jpg"];
+    filePath = [imagesPath stringByAppendingPathComponent:@"tiger.jpg"];
     success = [fileManager fileExistsAtPath:filePath];
     if (!success) {
         NSString *path = [[NSBundle mainBundle] pathForResource:@"tiger" ofType:@"jpg"];

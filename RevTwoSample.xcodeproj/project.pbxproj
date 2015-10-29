@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		051EC38A1BC85ED400EED211 /* sample.db in Resources */ = {isa = PBXBuildFile; fileRef = D832736A1BACBADD005DA1C6 /* sample.db */; settings = {ASSET_TAGS = (); }; };
 		7B4AC1928F1D3ED4C1FA63A7 /* libPods-RevTwoSample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3739DD56CD9A1A1DF98F16EE /* libPods-RevTwoSample.a */; };
-		D85604E31BC4170E00057EC2 /* librevtwo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D85604E21BC4170E00057EC2 /* librevtwo.a */; settings = {ASSET_TAGS = (); }; };
 		D85F846C1BCFED950079D75B /* catalog.db in Resources */ = {isa = PBXBuildFile; fileRef = D85F846B1BCFEC160079D75B /* catalog.db */; settings = {ASSET_TAGS = (); }; };
 		D88304AC1B95F3F8007ABDAC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D88304AB1B95F3F8007ABDAC /* main.m */; };
 		D88304AF1B95F3F8007ABDAC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D88304AE1B95F3F8007ABDAC /* AppDelegate.m */; };
@@ -30,6 +29,7 @@
 		D88304EA1B95F533007ABDAC /* logo_white.png in Resources */ = {isa = PBXBuildFile; fileRef = D88304E91B95F533007ABDAC /* logo_white.png */; };
 		D88304EF1B9603C5007ABDAC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D88304EE1B9603C5007ABDAC /* libsqlite3.dylib */; };
 		D88304F31B9617FF007ABDAC /* logo_black_sm.png in Resources */ = {isa = PBXBuildFile; fileRef = D88304F21B9617FF007ABDAC /* logo_black_sm.png */; };
+		D8BD8E721BD55AD7000F2A9C /* librevtwo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8BD8E711BD55AD7000F2A9C /* librevtwo.a */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +47,6 @@
 		5FAD38246BC0E4AC7225C947 /* Pods-RevTwoSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RevTwoSample.release.xcconfig"; path = "Pods/Target Support Files/Pods-RevTwoSample/Pods-RevTwoSample.release.xcconfig"; sourceTree = "<group>"; };
 		D832736A1BACBADD005DA1C6 /* sample.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample.db; sourceTree = "<group>"; };
 		D8438A381BBC23A500857907 /* Revtwo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Revtwo.h; sourceTree = "<group>"; };
-		D85604E21BC4170E00057EC2 /* librevtwo.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = librevtwo.a; sourceTree = "<group>"; };
 		D85F846B1BCFEC160079D75B /* catalog.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = catalog.db; sourceTree = "<group>"; };
 		D88304A61B95F3F8007ABDAC /* RevTwoSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RevTwoSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D88304AA1B95F3F8007ABDAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -78,6 +77,7 @@
 		D88304EE1B9603C5007ABDAC /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		D88304F21B9617FF007ABDAC /* logo_black_sm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_black_sm.png; sourceTree = "<group>"; };
 		D8BC25401BC2B46A00246804 /* R2NewTicketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = R2NewTicketViewController.h; sourceTree = "<group>"; };
+		D8BD8E711BD55AD7000F2A9C /* librevtwo.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = librevtwo.a; sourceTree = "<group>"; };
 		FDCBF35BBE1E31E8F6F81EFD /* Pods-RevTwoSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RevTwoSample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RevTwoSample/Pods-RevTwoSample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,7 +87,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D88304EF1B9603C5007ABDAC /* libsqlite3.dylib in Frameworks */,
-				D85604E31BC4170E00057EC2 /* librevtwo.a in Frameworks */,
+				D8BD8E721BD55AD7000F2A9C /* librevtwo.a in Frameworks */,
 				7B4AC1928F1D3ED4C1FA63A7 /* libPods-RevTwoSample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,7 +107,7 @@
 			children = (
 				D88304EE1B9603C5007ABDAC /* libsqlite3.dylib */,
 				3739DD56CD9A1A1DF98F16EE /* libPods-RevTwoSample.a */,
-				D85604E21BC4170E00057EC2 /* librevtwo.a */,
+				D8BD8E711BD55AD7000F2A9C /* librevtwo.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
