@@ -29,6 +29,10 @@
                       @"Create New Ticket", nil];
     self.pickedTutorial = NO;
     
+    
+    
+    
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -38,6 +42,11 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     self.pickedTutorial = NO;
+    /*
+     * notification permissions
+     */
+    UIUserNotificationSettings* notificationSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

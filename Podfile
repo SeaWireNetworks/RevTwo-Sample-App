@@ -3,6 +3,7 @@
 
 target 'RevTwoSample' do
     pod "PubNub", "~> 4.0"
+    pod "libjingle_peerconnection"
 end
 
 target 'RevTwoSampleTests' do

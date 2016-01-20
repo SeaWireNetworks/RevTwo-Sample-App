@@ -21,7 +21,14 @@
     /////////////////////////////////////////////////////////////////////////////////
     //add your RevTwo product key here
     /////////////////////////////////////////////////////////////////////////////////
-    R2Initialize(@"ADD YOUR KEY HERE", YES);
+    R2Initialize(@"ADD YOUR KEY HERE", R2MODE_DEVELOPMENT);
+    
+    //customizations
+    Revtwo *customizer = [[Revtwo alloc] init];
+    [customizer R2customize_incomingCall_text:@"Incoming call from RevTwo Support"];
+    [customizer R2customize_incomingCall_backgroundColor:[UIColor colorWithRed:177/255.0f green:193/255.0f blue:209/255.0f alpha:1] gradientOn:YES];
+    [customizer R2customize_incomingCall_textColor:[UIColor blackColor]];
+    [customizer R2customize_incomingCall_image:[UIImage imageNamed:@"logo.png"]];
     
     //Adding files for file browser
     BOOL success;
@@ -86,6 +93,12 @@
     }
     
     
+    /*
+     * NOTIFICATIONS
+     */
+    [self setupVOIP];
+    
+    
     return YES;
 }
 
@@ -109,6 +122,44 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+
+
+
+
+
+
+/*
+ * VOIP
+ */
+-(void)setupVOIP{
+    // Create a push registry object
+    PKPushRegistry * voipRegistry = [[PKPushRegistry alloc] initWithQueue: dispatch_get_main_queue()];
+    // Set the registry's delegate to self
+    voipRegistry.delegate = self;
+    // Set the push type to VoIP
+    voipRegistry.desiredPushTypes = [NSSet setWithObject:PKPushTypeVoIP];
+}
+
+
+
+/*
+ * PKPushRegistryDelegate
+ */
+// Handle updated push credentials
+- (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials: (PKPushCredentials *)credentials forType:(NSString *)type {
+    R2Trace(@"update apns token");
+    R2UpdatePushCredentials(credentials.token);
+}
+
+
+
+// Handle incoming pushes
+- (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(NSString *)type {
+    // Process the received push
+    R2Trace(@"got push notification");
+    R2ReceivedNotification();
 }
 
 @end

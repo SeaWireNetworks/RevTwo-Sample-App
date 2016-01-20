@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		051EC38A1BC85ED400EED211 /* sample.db in Resources */ = {isa = PBXBuildFile; fileRef = D832736A1BACBADD005DA1C6 /* sample.db */; settings = {ASSET_TAGS = (); }; };
+		051EC38A1BC85ED400EED211 /* sample.db in Resources */ = {isa = PBXBuildFile; fileRef = D832736A1BACBADD005DA1C6 /* sample.db */; };
 		7B4AC1928F1D3ED4C1FA63A7 /* libPods-RevTwoSample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3739DD56CD9A1A1DF98F16EE /* libPods-RevTwoSample.a */; };
-		D85F846C1BCFED950079D75B /* catalog.db in Resources */ = {isa = PBXBuildFile; fileRef = D85F846B1BCFEC160079D75B /* catalog.db */; settings = {ASSET_TAGS = (); }; };
+		D81712051C1B40E000B0DCB3 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = D81712041C1B40E000B0DCB3 /* logo.png */; };
+		D85F846C1BCFED950079D75B /* catalog.db in Resources */ = {isa = PBXBuildFile; fileRef = D85F846B1BCFEC160079D75B /* catalog.db */; };
 		D88304AC1B95F3F8007ABDAC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D88304AB1B95F3F8007ABDAC /* main.m */; };
 		D88304AF1B95F3F8007ABDAC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D88304AE1B95F3F8007ABDAC /* AppDelegate.m */; };
 		D88304B51B95F3F8007ABDAC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D88304B31B95F3F8007ABDAC /* Main.storyboard */; };
@@ -29,7 +30,7 @@
 		D88304EA1B95F533007ABDAC /* logo_white.png in Resources */ = {isa = PBXBuildFile; fileRef = D88304E91B95F533007ABDAC /* logo_white.png */; };
 		D88304EF1B9603C5007ABDAC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D88304EE1B9603C5007ABDAC /* libsqlite3.dylib */; };
 		D88304F31B9617FF007ABDAC /* logo_black_sm.png in Resources */ = {isa = PBXBuildFile; fileRef = D88304F21B9617FF007ABDAC /* logo_black_sm.png */; };
-		D8BD8E721BD55AD7000F2A9C /* librevtwo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8BD8E711BD55AD7000F2A9C /* librevtwo.a */; settings = {ASSET_TAGS = (); }; };
+		D8AB16A11C4A8A8C002D3C72 /* librevtwo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AB16A01C4A8A8C002D3C72 /* librevtwo.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,8 +46,10 @@
 /* Begin PBXFileReference section */
 		3739DD56CD9A1A1DF98F16EE /* libPods-RevTwoSample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RevTwoSample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FAD38246BC0E4AC7225C947 /* Pods-RevTwoSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RevTwoSample.release.xcconfig"; path = "Pods/Target Support Files/Pods-RevTwoSample/Pods-RevTwoSample.release.xcconfig"; sourceTree = "<group>"; };
+		D81712041C1B40E000B0DCB3 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		D832736A1BACBADD005DA1C6 /* sample.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample.db; sourceTree = "<group>"; };
 		D8438A381BBC23A500857907 /* Revtwo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Revtwo.h; sourceTree = "<group>"; };
+		D85E34501C1735E90036D646 /* R2IncomingCallViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = R2IncomingCallViewController.h; sourceTree = "<group>"; };
 		D85F846B1BCFEC160079D75B /* catalog.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = catalog.db; sourceTree = "<group>"; };
 		D88304A61B95F3F8007ABDAC /* RevTwoSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RevTwoSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D88304AA1B95F3F8007ABDAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -76,8 +79,8 @@
 		D88304E91B95F533007ABDAC /* logo_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_white.png; sourceTree = "<group>"; };
 		D88304EE1B9603C5007ABDAC /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		D88304F21B9617FF007ABDAC /* logo_black_sm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_black_sm.png; sourceTree = "<group>"; };
+		D8AB16A01C4A8A8C002D3C72 /* librevtwo.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = librevtwo.a; sourceTree = "<group>"; };
 		D8BC25401BC2B46A00246804 /* R2NewTicketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = R2NewTicketViewController.h; sourceTree = "<group>"; };
-		D8BD8E711BD55AD7000F2A9C /* librevtwo.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = librevtwo.a; sourceTree = "<group>"; };
 		FDCBF35BBE1E31E8F6F81EFD /* Pods-RevTwoSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RevTwoSample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RevTwoSample/Pods-RevTwoSample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,7 +90,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D88304EF1B9603C5007ABDAC /* libsqlite3.dylib in Frameworks */,
-				D8BD8E721BD55AD7000F2A9C /* librevtwo.a in Frameworks */,
+				D8AB16A11C4A8A8C002D3C72 /* librevtwo.a in Frameworks */,
 				7B4AC1928F1D3ED4C1FA63A7 /* libPods-RevTwoSample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,7 +110,7 @@
 			children = (
 				D88304EE1B9603C5007ABDAC /* libsqlite3.dylib */,
 				3739DD56CD9A1A1DF98F16EE /* libPods-RevTwoSample.a */,
-				D8BD8E711BD55AD7000F2A9C /* librevtwo.a */,
+				D8AB16A01C4A8A8C002D3C72 /* librevtwo.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -119,6 +122,16 @@
 				5FAD38246BC0E4AC7225C947 /* Pods-RevTwoSample.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		D85E34511C1735F00036D646 /* RevTwo Headers */ = {
+			isa = PBXGroup;
+			children = (
+				D8438A381BBC23A500857907 /* Revtwo.h */,
+				D8BC25401BC2B46A00246804 /* R2NewTicketViewController.h */,
+				D85E34501C1735E90036D646 /* R2IncomingCallViewController.h */,
+			);
+			name = "RevTwo Headers";
 			sourceTree = "<group>";
 		};
 		D883049D1B95F3F8007ABDAC = {
@@ -149,12 +162,12 @@
 				D88304B31B95F3F8007ABDAC /* Main.storyboard */,
 				D88304CF1B95F474007ABDAC /* TutorialTableViewController.h */,
 				D88304D01B95F474007ABDAC /* TutorialTableViewController.m */,
-				D8438A381BBC23A500857907 /* Revtwo.h */,
-				D8BC25401BC2B46A00246804 /* R2NewTicketViewController.h */,
+				D85E34511C1735F00036D646 /* RevTwo Headers */,
 				D88304D51B95F4B7007ABDAC /* Tutorials */,
 				D88304DC1B95F50D007ABDAC /* Files */,
 				D88304E91B95F533007ABDAC /* logo_white.png */,
 				D88304F21B9617FF007ABDAC /* logo_black_sm.png */,
+				D81712041C1B40E000B0DCB3 /* logo.png */,
 				D88304B61B95F3F8007ABDAC /* Images.xcassets */,
 				D88304B81B95F3F8007ABDAC /* LaunchScreen.xib */,
 				D88304A91B95F3F8007ABDAC /* Supporting Files */,
@@ -228,6 +241,7 @@
 				D88304A31B95F3F8007ABDAC /* Frameworks */,
 				D88304A41B95F3F8007ABDAC /* Resources */,
 				72A531DCBB7E6EDC00610F0F /* Copy Pods Resources */,
+				5BF27E08A342A687B5EED893 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -268,6 +282,14 @@
 					D88304A51B95F3F8007ABDAC = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = CWS3SY5J47;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					D88304BE1B95F3F8007ABDAC = {
 						CreatedOnToolsVersion = 6.4;
@@ -303,6 +325,7 @@
 				D85F846C1BCFED950079D75B /* catalog.db in Resources */,
 				D88304B51B95F3F8007ABDAC /* Main.storyboard in Resources */,
 				D88304E41B95F521007ABDAC /* macaw.jpg in Resources */,
+				D81712051C1B40E000B0DCB3 /* logo.png in Resources */,
 				D88304E51B95F521007ABDAC /* mountain.jpg in Resources */,
 				D88304E61B95F521007ABDAC /* reef.jpg in Resources */,
 				D88304E71B95F521007ABDAC /* sample.pdf in Resources */,
@@ -325,6 +348,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		5BF27E08A342A687B5EED893 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RevTwoSample/Pods-RevTwoSample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		72A531DCBB7E6EDC00610F0F /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -500,6 +538,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = RevTwoSample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -519,13 +558,14 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = RevTwoSample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "48bd21f5-cb5a-4ec5-b94f-a161a3c3596d";
 			};
 			name = Release;
 		};
