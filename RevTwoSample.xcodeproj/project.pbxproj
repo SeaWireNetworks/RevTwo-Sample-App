@@ -30,7 +30,7 @@
 		D88304EA1B95F533007ABDAC /* logo_white.png in Resources */ = {isa = PBXBuildFile; fileRef = D88304E91B95F533007ABDAC /* logo_white.png */; };
 		D88304EF1B9603C5007ABDAC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D88304EE1B9603C5007ABDAC /* libsqlite3.dylib */; };
 		D88304F31B9617FF007ABDAC /* logo_black_sm.png in Resources */ = {isa = PBXBuildFile; fileRef = D88304F21B9617FF007ABDAC /* logo_black_sm.png */; };
-		D8AB16A11C4A8A8C002D3C72 /* librevtwo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AB16A01C4A8A8C002D3C72 /* librevtwo.a */; };
+		D8EF01981C5963CC000E362F /* librevtwo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8EF01971C5963CC000E362F /* librevtwo.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,8 +79,8 @@
 		D88304E91B95F533007ABDAC /* logo_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_white.png; sourceTree = "<group>"; };
 		D88304EE1B9603C5007ABDAC /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		D88304F21B9617FF007ABDAC /* logo_black_sm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_black_sm.png; sourceTree = "<group>"; };
-		D8AB16A01C4A8A8C002D3C72 /* librevtwo.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = librevtwo.a; sourceTree = "<group>"; };
 		D8BC25401BC2B46A00246804 /* R2NewTicketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = R2NewTicketViewController.h; sourceTree = "<group>"; };
+		D8EF01971C5963CC000E362F /* librevtwo.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = librevtwo.a; sourceTree = "<group>"; };
 		FDCBF35BBE1E31E8F6F81EFD /* Pods-RevTwoSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RevTwoSample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RevTwoSample/Pods-RevTwoSample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,7 +90,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D88304EF1B9603C5007ABDAC /* libsqlite3.dylib in Frameworks */,
-				D8AB16A11C4A8A8C002D3C72 /* librevtwo.a in Frameworks */,
+				D8EF01981C5963CC000E362F /* librevtwo.a in Frameworks */,
 				7B4AC1928F1D3ED4C1FA63A7 /* libPods-RevTwoSample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -110,7 +110,7 @@
 			children = (
 				D88304EE1B9603C5007ABDAC /* libsqlite3.dylib */,
 				3739DD56CD9A1A1DF98F16EE /* libPods-RevTwoSample.a */,
-				D8AB16A01C4A8A8C002D3C72 /* librevtwo.a */,
+				D8EF01971C5963CC000E362F /* librevtwo.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -281,6 +281,7 @@
 				TargetAttributes = {
 					D88304A51B95F3F8007ABDAC = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = CWS3SY5J47;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;

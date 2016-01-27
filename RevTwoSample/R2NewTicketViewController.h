@@ -11,9 +11,6 @@
 
 @interface R2NewTicketViewController : UIViewController <UIAlertViewDelegate, UITextViewDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate>
 //text fields
-@property UITextField *nameField;
-@property UITextField *emailField;
-@property UITextField *phoneField;
 @property UITextView *descriptionField;
 @property UIBarButtonItem *submitButton;
 //existing ticket
