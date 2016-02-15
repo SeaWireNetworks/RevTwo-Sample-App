@@ -16,6 +16,7 @@
 #import "PNPresenceWhereNowResult.h"
 #import "PNAcknowledgmentStatus.h"
 #import "PNChannelGroupsResult.h"
+#import "PNClientInformation.h"
 #import "PNSubscriberResults.h"
 #import "PNSubscribeStatus.h"
 #import "PNPublishStatus.h"
@@ -43,5 +44,10 @@
 #import "PNStatus.h"
 #import "PNAES.h"
 #import "PNLog.h"
+
+// Fabric
+#ifdef FABRIC_SUPPORT
+    #import "PubNub+FAB.h"
+#endif
 
 #endif

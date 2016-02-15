@@ -16,19 +16,17 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-    
     /////////////////////////////////////////////////////////////////////////////////
-    //add your RevTwo product key here
+    //add your RevTwo product key and secret key here
     /////////////////////////////////////////////////////////////////////////////////
-    R2Initialize(@"ADD YOUR KEY HERE", R2MODE_DEVELOPMENT);
+    R2Initialize(@"ADD YOUR KEY HERE",@"ADD YOUR PRIVATE KEY HERE", R2MODE_DEVELOPMENT);
     
     //customizations
     Revtwo *customizer = [[Revtwo alloc] init];
     [customizer R2customize_incomingCall_text:@"Incoming call from RevTwo Support"];
     [customizer R2customize_incomingCall_backgroundColor:[UIColor colorWithRed:177/255.0f green:193/255.0f blue:209/255.0f alpha:1] gradientOn:YES];
     [customizer R2customize_incomingCall_textColor:[UIColor blackColor]];
-    [customizer R2customize_incomingCall_image:[UIImage imageNamed:@"logo.png"]];
+    [customizer R2customize_incomingCall_image:[UIImage imageNamed:@"R2logo.png"]];
     
     //Adding files for file browser
     BOOL success;

@@ -33,7 +33,7 @@
  */
 - (instancetype)initForOperation:(PNOperationType)operation
                         category:(PNStatusCategory)category
-             withProcessingError:(NSError *)error NS_DESIGNATED_INITIALIZER;
+             withProcessingError:(NSError *)error;
 
 /**
  @brief  Initialize result instance in response to successful task completion.
@@ -53,7 +53,7 @@
 - (instancetype)initForOperation:(PNOperationType)operation
                completedWithTaks:(NSURLSessionDataTask *)task
                    processedData:(NSDictionary *)processedData
-                 processingError:(NSError *)error NS_DESIGNATED_INITIALIZER;
+                 processingError:(NSError *)error;
 
 
 #pragma mark - Interpretation
@@ -97,6 +97,11 @@
 
 
 #pragma mark - Information
+
+- (NSString *)stringifiedCategory {
+    
+    return PNStatusCategoryStrings[self.category];
+}
 
 - (void)updateCategory:(PNStatusCategory)category; {
 
@@ -335,6 +340,11 @@
             
             errorDetails = @{@"information":information};
         }
+    }
+    // Check whether error details represented with expected format or not.
+    else if (![errorDetails isKindOfClass:NSDictionary.class]) {
+        
+        errorDetails = @{@"information": errorDetails};
     }
     
     return errorDetails;

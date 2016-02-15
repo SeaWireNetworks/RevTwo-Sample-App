@@ -4,12 +4,15 @@
  @copyright © 2009-2015 PubNub, Inc.
  */
 #import "PubNub+History.h"
+#import "PNServiceData+Private.h"
+#import "PNErrorStatus+Private.h"
 #import "PNRequestParameters.h"
 #import "PubNub+CorePrivate.h"
 #import "PNSubscribeStatus.h"
 #import "PNResult+Private.h"
 #import "PNStatus+Private.h"
 #import "PNHistoryResult.h"
+#import "PNLogMacro.h"
 #import "PNHelpers.h"
 
 
@@ -115,11 +118,13 @@
                                      @"include_token": (shouldIncludeTimeToken ? @"true" : @"false")}];
     if (startDate) {
         
-        [parameters addQueryParameter:[startDate stringValue] forFieldName:@"start"];
+        [parameters addQueryParameter:[[PNNumber timeTokenFromNumber:startDate] stringValue]
+                         forFieldName:@"start"];
     }
     if (endDate) {
         
-        [parameters addQueryParameter:[endDate stringValue] forFieldName:@"end"];
+        [parameters addQueryParameter:[[PNNumber timeTokenFromNumber:endDate] stringValue]
+                         forFieldName:@"end"];
     }
     if ([channel length]) {
         
@@ -127,7 +132,7 @@
                       forPlaceholder:@"{channel}"];
     }
     
-    DDLogAPICall([[self class] ddLogLevel], @"<PubNub> %@ for '%@' channel%@%@ with %@ limit%@.",
+    DDLogAPICall([[self class] ddLogLevel], @"<PubNub::API> %@ for '%@' channel%@%@ with %@ limit%@.",
                  (shouldReverseOrder ? @"Reversed history" : @"History"), (channel?: @"<error>"),
                  (startDate ? [NSString stringWithFormat:@" from %@", startDate] : @""),
                  (endDate ? [NSString stringWithFormat:@" to %@", endDate] : @""), @(limit),
@@ -143,6 +148,15 @@
                // more need in it and probably whole client instance has been deallocated.
                #pragma clang diagnostic push
                #pragma clang diagnostic ignored "-Wreceiver-is-weak"
+               if (status.isError) {
+                    
+                   status.retryBlock = ^{
+                       
+                       [weakSelf historyForChannel:channel start:startDate end:endDate limit:limit
+                                           reverse:shouldReverseOrder
+                                  includeTimeToken:shouldIncludeTimeToken withCompletion:block];
+                   };
+               }
                [weakSelf handleHistoryResult:result withStatus:status completion:block];
                #pragma clang diagnostic pop
            }];
@@ -155,15 +169,16 @@
                  completion:(PNHistoryCompletionBlock)block {
 
     if (result && (result.serviceData)[@"decryptError"]) {
-
-        status = (PNErrorStatus *) [PNStatus statusForOperation:PNHistoryOperation
-                                                       category:PNDecryptionErrorCategory
-                                            withProcessingError:nil];
+        
+        status = [PNErrorStatus statusForOperation:PNHistoryOperation
+                                          category:PNDecryptionErrorCategory
+                               withProcessingError:nil];
         NSMutableDictionary *updatedData = [result.serviceData mutableCopy];
         [updatedData removeObjectForKey:@"decryptError"];
+        status.associatedObject = [PNHistoryData dataWithServiceResponse:updatedData];
         [status updateData:updatedData];
     }
-    [self callBlock:block status:NO withResult:result andStatus:status];
+    [self callBlock:block status:NO withResult:(status ? nil : result) andStatus:status];
 }
 
 #pragma mark -

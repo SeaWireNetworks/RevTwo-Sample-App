@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+#import "PNStructures.h"
 
 
 /**
@@ -137,6 +138,16 @@
  @since 4.0
  */
 @property (nonatomic, assign) NSInteger presenceHeartbeatInterval;
+
+/**
+ @brief  Stores bitfield which describe client's behavior on which heartbeat request processing states 
+         delegate should be notified.
+ 
+ @default By default client use \c PNHeartbeatNotifyFailure to notify only about failed requests.
+ 
+ @since 4.2.7
+ */
+@property (nonatomic, assign) PNHeartbeatNotificationOptions heartbeatNotificationOptions;
 
 /**
  @brief   Stores whether client should communicate with \b PubNub services using secured

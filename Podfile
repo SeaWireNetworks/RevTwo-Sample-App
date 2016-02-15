@@ -2,8 +2,7 @@
 # platform :ios, '6.0'
 
 target 'RevTwoSample' do
-    pod "PubNub", "~> 4.0"
-    pod "libjingle_peerconnection"
+    pod "RevTwo"
 end
 
 target 'RevTwoSampleTests' do

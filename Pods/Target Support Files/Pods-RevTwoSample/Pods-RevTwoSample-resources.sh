@@ -57,6 +57,36 @@ install_resource()
       ;;
   esac
 }
+if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_resource "RevTwo/Resources/R2Background.jpg"
+  install_resource "RevTwo/Resources/R2CommunityCall_OptionsView.xib"
+  install_resource "RevTwo/Resources/R2CommunityCall_ScreenShareView.xib"
+  install_resource "RevTwo/Resources/R2IconCamera.png"
+  install_resource "RevTwo/Resources/R2IconEndCall.png"
+  install_resource "RevTwo/Resources/R2IconMute.png"
+  install_resource "RevTwo/Resources/R2IconScreenShare.png"
+  install_resource "RevTwo/Resources/R2IconSpeaker.png"
+  install_resource "RevTwo/Resources/R2IconStartCall.png"
+  install_resource "RevTwo/Resources/R2IconX.png"
+  install_resource "RevTwo/Resources/R2logo.png"
+  install_resource "RevTwo/Resources/R2NewTicket_ExistingView.xib"
+  install_resource "RevTwo/Resources/R2NewTicket_FormView.xib"
+fi
+if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_resource "RevTwo/Resources/R2Background.jpg"
+  install_resource "RevTwo/Resources/R2CommunityCall_OptionsView.xib"
+  install_resource "RevTwo/Resources/R2CommunityCall_ScreenShareView.xib"
+  install_resource "RevTwo/Resources/R2IconCamera.png"
+  install_resource "RevTwo/Resources/R2IconEndCall.png"
+  install_resource "RevTwo/Resources/R2IconMute.png"
+  install_resource "RevTwo/Resources/R2IconScreenShare.png"
+  install_resource "RevTwo/Resources/R2IconSpeaker.png"
+  install_resource "RevTwo/Resources/R2IconStartCall.png"
+  install_resource "RevTwo/Resources/R2IconX.png"
+  install_resource "RevTwo/Resources/R2logo.png"
+  install_resource "RevTwo/Resources/R2NewTicket_ExistingView.xib"
+  install_resource "RevTwo/Resources/R2NewTicket_FormView.xib"
+fi
 
 mkdir -p "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
 rsync -avr --copy-links --no-relative --exclude '*/.svn/*' --files-from="$RESOURCES_TO_COPY" / "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

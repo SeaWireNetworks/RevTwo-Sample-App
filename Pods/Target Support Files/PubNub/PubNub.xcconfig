@@ -1,5 +1,5 @@
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/PubNub" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/CocoaLumberjack" "${PODS_ROOT}/Headers/Public/PubNub" "${PODS_ROOT}/Headers/Public/libjingle_peerconnection"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/PubNub" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/CocoaLumberjack" "${PODS_ROOT}/Headers/Public/PubNub" "${PODS_ROOT}/Headers/Public/RevTwo" "${PODS_ROOT}/Headers/Public/libjingle_peerconnection"
 OTHER_LDFLAGS = -l"z"
 PODS_ROOT = ${SRCROOT}
 SKIP_INSTALL = YES

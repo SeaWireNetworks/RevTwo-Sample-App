@@ -5,6 +5,7 @@
  */
 #import "PNSubscribeParser.h"
 #import "PubNub+CorePrivate.h"
+#import "PNLogMacro.h"
 #import "PNHelpers.h"
 #import "PNAES.h"
 
@@ -57,7 +58,7 @@ static NSUInteger const kPNEventChannelsDetailsElementIndex = 3;
  
  @param data           Reference on service-provided data about event.
  @param channel        Reference on channel for which event has been received.
- @param channelGroup   Reference on channel group for which event has been received.
+ @param group          Reference on channel group for which event has been received.
  @param additionalData Additional information provided by client to complete parsing.
  
  @return Pre-processed event information (depending on stored data).
@@ -65,7 +66,7 @@ static NSUInteger const kPNEventChannelsDetailsElementIndex = 3;
  @since 4.0
  */
 + (NSMutableDictionary *)eventFromData:(id)data forChannel:(NSString *)channel
-                                 group:(NSString *)channelGroup
+                                 group:(NSString *)group
               withAdditionalParserData:(NSDictionary *)additionalData;
 
 /**
@@ -174,10 +175,11 @@ static NSUInteger const kPNEventChannelsDetailsElementIndex = 3;
             for (NSUInteger eventIdx = 0; eventIdx < [feedEvents count]; eventIdx++) {
                 
                 // Fetching remote data object name on which event fired.
-                NSString *objectName = (eventIdx < [channels count] ? channels[eventIdx] : channels[0]);
-                NSString *groupName = ([groups count] > eventIdx ? groups[eventIdx] : nil);
+                NSString *objectOrGroupName = (eventIdx < [channels count] ? channels[eventIdx] : channels[0]);
+                NSString *objectName = ([groups count] > eventIdx ? groups[eventIdx] : nil);
                 NSMutableDictionary *event = [self eventFromData:feedEvents[eventIdx]
-                                                      forChannel:objectName group:groupName
+                                                      forChannel:(objectName?: objectOrGroupName)
+                                                           group:(objectName? objectOrGroupName: nil)
                                         withAdditionalParserData:additionalData];
                 event[@"timetoken"] = timeToken;
                 [events addObject:event];
@@ -194,23 +196,24 @@ static NSUInteger const kPNEventChannelsDetailsElementIndex = 3;
 #pragma mark - Events processing
 
 + (NSMutableDictionary *)eventFromData:(id)data forChannel:(NSString *)channel
-                                 group:(NSString *)channelGroup
+                                 group:(NSString *)group
               withAdditionalParserData:(NSDictionary *)additionalData {
     
     NSMutableDictionary *event = [NSMutableDictionary new];
     if ([channel length]) {
         
-        event[(![channelGroup length] ? @"subscribedChannel": @"actualChannel")] = channel;
+        event[(![group length] ? @"subscribedChannel": @"actualChannel")] = channel;
     }
-    if ([channelGroup length]) {
+    if ([group length]) {
         
-        event[@"subscribedChannel"] = channelGroup;
+        event[@"subscribedChannel"] = group;
     }
     
     BOOL isPresenceEvent = [PNChannel isPresenceObject:channel];
     if (![channel length] && [data isKindOfClass:[NSDictionary class]]) {
         
-        isPresenceEvent = (data[@"action"] != nil && data[@"timestamp"] != nil);
+        isPresenceEvent = (data[@"timestamp"] != nil &&
+                           (data[@"action"] != nil || data[@"occupancy"] != nil));
     }
     
     if (isPresenceEvent) {
@@ -234,30 +237,35 @@ static NSUInteger const kPNEventChannelsDetailsElementIndex = 3;
     if ([(NSString *)additionalData[@"cipherKey"] length]){
         
         NSError *decryptionError;
+        id decryptedEvent = nil;
         if ([data isKindOfClass:[NSString class]]) {
             
             NSData *eventData = [PNAES decrypt:data withKey:additionalData[@"cipherKey"]
                                       andError:&decryptionError];
-            NSString *encryptedEventData = nil;
+            NSString *decryptedEventData = nil;
             if (eventData) {
                 
-                encryptedEventData = [[NSString alloc] initWithData:eventData
+                decryptedEventData = [[NSString alloc] initWithData:eventData
                                                            encoding:NSUTF8StringEncoding];
             }
             
             // In case if after encryption another object has been received client
             // should try to de-serialize it again as JSON object.
-            if (encryptedEventData && ![encryptedEventData isEqualToString:data]) {
+            if (decryptedEventData && ![decryptedEventData isEqualToString:data]) {
                 
-                message[@"message"] = [PNJSON JSONObjectFrom:encryptedEventData withError:nil];
+                decryptedEvent = [PNJSON JSONObjectFrom:decryptedEventData withError:nil];
             }
         }
         
-        if (decryptionError || ![data isKindOfClass:[NSString class]]) {
+        if (decryptionError || !decryptedEvent) {
             
-            DDLogAESError([self ddLogLevel], @"<PubNub> Message decryption error: %@",
+            DDLogAESError([self ddLogLevel], @"<PubNub::AES> Message decryption error: %@",
                           decryptionError);
             message[@"decryptError"] = @YES;
+        }
+        else {
+            
+            message[@"message"] = decryptedEvent;
         }
     }
     
@@ -269,7 +277,7 @@ static NSUInteger const kPNEventChannelsDetailsElementIndex = 3;
     NSMutableDictionary *presence = [NSMutableDictionary new];
     
     // Processing common for all presence events data.
-    presence[@"presenceEvent"] = data[@"action"];
+    presence[@"presenceEvent"] = (data[@"action"]?: @"interval");
     presence[@"presence"] = [NSMutableDictionary new];
     presence[@"presence"][@"timetoken"] = data[@"timestamp"];
     if (data[@"uuid"]) {
@@ -280,7 +288,7 @@ static NSUInteger const kPNEventChannelsDetailsElementIndex = 3;
     // Check whether this is not state modification event.
     if (![presence[@"presenceEvent"] isEqualToString:@"state-change"]) {
         
-        presence[@"presence"][@"occupancy"] = data[@"occupancy"];
+        presence[@"presence"][@"occupancy"] = (data[@"occupancy"]?: @0);
     }
     if (data[@"data"]) {
      

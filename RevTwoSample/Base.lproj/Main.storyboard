@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="uif-LE-o9b">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="uif-LE-o9b">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -15,7 +15,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="tutorialCell" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="EfV-Mz-L6H">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="tutorialCell" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="tutorialCell" id="EfV-Mz-L6H">
                                 <rect key="frame" x="0.0" y="86" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EfV-Mz-L6H" id="7PI-rP-rjH">
@@ -164,13 +164,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="FileBrowserViewController.m" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2pA-ZT-y5J">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FileBrowserViewController.m" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2pA-ZT-y5J">
                                 <rect key="frame" x="16" y="28" width="220" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="mAy-6w-qek">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="mAy-6w-qek">
                                 <rect key="frame" x="0.0" y="57" width="600" height="543"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -182,10 +182,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="2pA-ZT-y5J" firstAttribute="top" secondItem="P9b-Aq-Jwa" secondAttribute="bottom" constant="8" id="2iw-i5-eUm"/>
-                            <constraint firstItem="mAy-6w-qek" firstAttribute="leading" secondItem="2Ch-Vq-hNS" secondAttribute="leadingMargin" constant="-16" id="Ztw-uI-Hhu"/>
+                            <constraint firstItem="mAy-6w-qek" firstAttribute="leading" secondItem="2Ch-Vq-hNS" secondAttribute="leadingMargin" constant="-20" id="Ztw-uI-Hhu"/>
                             <constraint firstItem="mAy-6w-qek" firstAttribute="top" secondItem="P9b-Aq-Jwa" secondAttribute="bottom" constant="37" id="dza-g3-VWN"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="mAy-6w-qek" secondAttribute="trailing" constant="-16" id="fqG-D1-hCR"/>
-                            <constraint firstItem="2pA-ZT-y5J" firstAttribute="leading" secondItem="2Ch-Vq-hNS" secondAttribute="leadingMargin" id="v15-fi-iye"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="mAy-6w-qek" secondAttribute="trailing" constant="-20" id="fqG-D1-hCR"/>
+                            <constraint firstItem="2pA-ZT-y5J" firstAttribute="leading" secondItem="2Ch-Vq-hNS" secondAttribute="leadingMargin" constant="-4" id="v15-fi-iye"/>
                             <constraint firstItem="QAU-fc-VDJ" firstAttribute="top" secondItem="mAy-6w-qek" secondAttribute="bottom" id="x6B-jH-AsD"/>
                         </constraints>
                     </view>
@@ -215,7 +215,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5bk-gl-v14">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5bk-gl-v14">
                                 <rect key="frame" x="16" y="57" width="568" height="523"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">By default, the database browsing widget is hooked up to the sample.db database.  You can edit the model to add catalog.db as another database.</string>
@@ -226,9 +226,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="5bk-gl-v14" firstAttribute="top" secondItem="o3b-MF-ssU" secondAttribute="bottom" constant="37" id="0lC-da-HEZ"/>
-                            <constraint firstItem="5bk-gl-v14" firstAttribute="trailing" secondItem="Jqr-aS-uxl" secondAttribute="trailingMargin" id="Ktg-VK-dUr"/>
-                            <constraint firstItem="5bk-gl-v14" firstAttribute="leading" secondItem="Jqr-aS-uxl" secondAttribute="leadingMargin" id="Og0-R0-55X"/>
-                            <constraint firstItem="PSN-qe-vMp" firstAttribute="leading" secondItem="Jqr-aS-uxl" secondAttribute="leadingMargin" id="gz7-hk-Tmh"/>
+                            <constraint firstItem="5bk-gl-v14" firstAttribute="trailing" secondItem="Jqr-aS-uxl" secondAttribute="trailingMargin" constant="4" id="Ktg-VK-dUr"/>
+                            <constraint firstItem="5bk-gl-v14" firstAttribute="leading" secondItem="Jqr-aS-uxl" secondAttribute="leadingMargin" constant="-4" id="Og0-R0-55X"/>
+                            <constraint firstItem="PSN-qe-vMp" firstAttribute="leading" secondItem="Jqr-aS-uxl" secondAttribute="leadingMargin" constant="-4" id="gz7-hk-Tmh"/>
                             <constraint firstItem="O72-ie-dQN" firstAttribute="top" secondItem="5bk-gl-v14" secondAttribute="bottom" constant="20" id="ia1-t3-3UA"/>
                             <constraint firstItem="PSN-qe-vMp" firstAttribute="top" secondItem="o3b-MF-ssU" secondAttribute="bottom" constant="8" id="tDa-EF-Ik3"/>
                         </constraints>

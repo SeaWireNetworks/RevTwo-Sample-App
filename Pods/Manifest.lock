@@ -1,23 +1,29 @@
 PODS:
-  - CocoaLumberjack (2.0.0):
-    - CocoaLumberjack/Default (= 2.0.0)
-    - CocoaLumberjack/Extensions (= 2.0.0)
-  - CocoaLumberjack/Core (2.0.0)
-  - CocoaLumberjack/Default (2.0.0):
+  - CocoaLumberjack (2.2.0):
+    - CocoaLumberjack/Default (= 2.2.0)
+    - CocoaLumberjack/Extensions (= 2.2.0)
+  - CocoaLumberjack/Core (2.2.0)
+  - CocoaLumberjack/Default (2.2.0):
     - CocoaLumberjack/Core
-  - CocoaLumberjack/Extensions (2.0.0):
+  - CocoaLumberjack/Extensions (2.2.0):
     - CocoaLumberjack/Default
-  - libjingle_peerconnection (10842.2.3)
-  - PubNub (4.0.3):
-    - CocoaLumberjack (= 2.0.0)
+  - libjingle_peerconnection (11177.2.0)
+  - PubNub (4.2.7):
+    - CocoaLumberjack (= 2.2.0)
+    - PubNub/Core (= 4.2.7)
+  - PubNub/Core (4.2.7):
+    - CocoaLumberjack (= 2.2.0)
+  - RevTwo (0.0.5):
+    - libjingle_peerconnection
+    - PubNub (~> 4.0)
 
 DEPENDENCIES:
-  - libjingle_peerconnection
-  - PubNub (~> 4.0)
+  - RevTwo
 
 SPEC CHECKSUMS:
-  CocoaLumberjack: a6f77d987d65dc7ba86b0f84db7d0b9084f77bcb
-  libjingle_peerconnection: 25b82d1d8de852367c9fd15b9699e547451e71b1
-  PubNub: bdcc6eae1e419fe88ea6ed9013b1f6357914c25b
+  CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
+  libjingle_peerconnection: 3458f646ddd61f08a9f3a0c43fb01fff5c165eb8
+  PubNub: 052a698177f64ab12889c513af425a2195ccaf12
+  RevTwo: c5fd8ff643e2cd2d484bd852f2e0e57db902118c
 
 COCOAPODS: 0.39.0

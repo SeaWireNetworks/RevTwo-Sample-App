@@ -7,7 +7,9 @@
 #import "PNPrivateStructures.h"
 #import "PNRequestParameters.h"
 #import "PubNub+CorePrivate.h"
+#import "PNStatus+Private.h"
 #import "PNConfiguration.h"
+#import "PNLogMacro.h"
 #import "PNHelpers.h"
 
 
@@ -120,13 +122,13 @@
     
     if (![object length]) {
         
-        DDLogAPICall([[self class] ddLogLevel], @"<PubNub> Global 'here now' information with %@ data.",
-                     PNHereNowDataStrings[level]);
+        DDLogAPICall([[self class] ddLogLevel], @"<PubNub::API> Global 'here now' information with "
+                     "%@ data.", PNHereNowDataStrings[level]);
     }
     else {
         
-        DDLogAPICall([[self class] ddLogLevel], @"<PubNub> Channel%@ 'here now' information for %@ with %@ data.",
-                     (!forChannel ? @" group" : @""), (object?: @"<error>"),
+        DDLogAPICall([[self class] ddLogLevel], @"<PubNub::API> Channel%@ 'here now' information "
+                     "for %@ with %@ data.", (!forChannel ? @" group" : @""), (object?: @"<error>"),
                      PNHereNowDataStrings[level]);
     }
     
@@ -140,6 +142,14 @@
            // more need in it and probably whole client instance has been deallocated.
            #pragma clang diagnostic push
            #pragma clang diagnostic ignored "-Wreceiver-is-weak"
+           if (status.isError) {
+                
+               status.retryBlock = ^{
+                   
+                   [weakSelf hereNowWithVerbosity:level forChannel:forChannel withName:object
+                                   withCompletion:block];
+               };
+           }
            [weakSelf callBlock:block status:NO withResult:result andStatus:status];
            #pragma clang diagnostic pop
        }];
@@ -155,8 +165,8 @@
         
         [parameters addPathComponent:[PNString percentEscapedString:uuid] forPlaceholder:@"{uuid}"];
     }
-    DDLogAPICall([[self class] ddLogLevel], @"<PubNub> 'Where now' presence information for %@.",
-                 (uuid?: @"<error>"));
+    DDLogAPICall([[self class] ddLogLevel], @"<PubNub::API> 'Where now' presence information for "
+                 "%@.", (uuid?: @"<error>"));
 
     __weak __typeof(self) weakSelf = self;
     [self processOperation:PNWhereNowOperation withParameters:parameters
@@ -168,6 +178,13 @@
                // more need in it and probably whole client instance has been deallocated.
                #pragma clang diagnostic push
                #pragma clang diagnostic ignored "-Wreceiver-is-weak"
+               if (status.isError) {
+                    
+                   status.retryBlock = ^{
+                       
+                       [weakSelf whereNowUUID:uuid withCompletion:block];
+                   };
+               }
                [weakSelf callBlock:block status:NO withResult:result andStatus:status];
                #pragma clang diagnostic pop
            }];
@@ -205,8 +222,8 @@
                                      forFieldName:@"state"];
                 }
             }
-            DDLogAPICall([[self class] ddLogLevel], @"<PubNub> Heartbeat for channels %@ and groups %@.",
-                         [channels componentsJoinedByString:@", "],
+            DDLogAPICall([[self class] ddLogLevel], @"<PubNub::API> Heartbeat for channels %@ and "
+                         "groups %@.", [channels componentsJoinedByString:@", "],
                          [groups componentsJoinedByString:@", "]);
             
             [self processOperation:PNHeartbeatOperation withParameters:parameters

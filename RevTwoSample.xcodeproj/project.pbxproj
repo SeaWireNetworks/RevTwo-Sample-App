@@ -28,9 +28,7 @@
 		D88304E71B95F521007ABDAC /* sample.pdf in Resources */ = {isa = PBXBuildFile; fileRef = D88304E11B95F521007ABDAC /* sample.pdf */; };
 		D88304E81B95F521007ABDAC /* tiger.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D88304E21B95F521007ABDAC /* tiger.jpg */; };
 		D88304EA1B95F533007ABDAC /* logo_white.png in Resources */ = {isa = PBXBuildFile; fileRef = D88304E91B95F533007ABDAC /* logo_white.png */; };
-		D88304EF1B9603C5007ABDAC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D88304EE1B9603C5007ABDAC /* libsqlite3.dylib */; };
 		D88304F31B9617FF007ABDAC /* logo_black_sm.png in Resources */ = {isa = PBXBuildFile; fileRef = D88304F21B9617FF007ABDAC /* logo_black_sm.png */; };
-		D8EF01981C5963CC000E362F /* librevtwo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8EF01971C5963CC000E362F /* librevtwo.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,8 +46,6 @@
 		5FAD38246BC0E4AC7225C947 /* Pods-RevTwoSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RevTwoSample.release.xcconfig"; path = "Pods/Target Support Files/Pods-RevTwoSample/Pods-RevTwoSample.release.xcconfig"; sourceTree = "<group>"; };
 		D81712041C1B40E000B0DCB3 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		D832736A1BACBADD005DA1C6 /* sample.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample.db; sourceTree = "<group>"; };
-		D8438A381BBC23A500857907 /* Revtwo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Revtwo.h; sourceTree = "<group>"; };
-		D85E34501C1735E90036D646 /* R2IncomingCallViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = R2IncomingCallViewController.h; sourceTree = "<group>"; };
 		D85F846B1BCFEC160079D75B /* catalog.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = catalog.db; sourceTree = "<group>"; };
 		D88304A61B95F3F8007ABDAC /* RevTwoSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RevTwoSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D88304AA1B95F3F8007ABDAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -79,8 +75,6 @@
 		D88304E91B95F533007ABDAC /* logo_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_white.png; sourceTree = "<group>"; };
 		D88304EE1B9603C5007ABDAC /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		D88304F21B9617FF007ABDAC /* logo_black_sm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_black_sm.png; sourceTree = "<group>"; };
-		D8BC25401BC2B46A00246804 /* R2NewTicketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = R2NewTicketViewController.h; sourceTree = "<group>"; };
-		D8EF01971C5963CC000E362F /* librevtwo.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = librevtwo.a; sourceTree = "<group>"; };
 		FDCBF35BBE1E31E8F6F81EFD /* Pods-RevTwoSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RevTwoSample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RevTwoSample/Pods-RevTwoSample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,8 +83,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D88304EF1B9603C5007ABDAC /* libsqlite3.dylib in Frameworks */,
-				D8EF01981C5963CC000E362F /* librevtwo.a in Frameworks */,
 				7B4AC1928F1D3ED4C1FA63A7 /* libPods-RevTwoSample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -110,7 +102,6 @@
 			children = (
 				D88304EE1B9603C5007ABDAC /* libsqlite3.dylib */,
 				3739DD56CD9A1A1DF98F16EE /* libPods-RevTwoSample.a */,
-				D8EF01971C5963CC000E362F /* librevtwo.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -122,16 +113,6 @@
 				5FAD38246BC0E4AC7225C947 /* Pods-RevTwoSample.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		D85E34511C1735F00036D646 /* RevTwo Headers */ = {
-			isa = PBXGroup;
-			children = (
-				D8438A381BBC23A500857907 /* Revtwo.h */,
-				D8BC25401BC2B46A00246804 /* R2NewTicketViewController.h */,
-				D85E34501C1735E90036D646 /* R2IncomingCallViewController.h */,
-			);
-			name = "RevTwo Headers";
 			sourceTree = "<group>";
 		};
 		D883049D1B95F3F8007ABDAC = {
@@ -162,7 +143,6 @@
 				D88304B31B95F3F8007ABDAC /* Main.storyboard */,
 				D88304CF1B95F474007ABDAC /* TutorialTableViewController.h */,
 				D88304D01B95F474007ABDAC /* TutorialTableViewController.m */,
-				D85E34511C1735F00036D646 /* RevTwo Headers */,
 				D88304D51B95F4B7007ABDAC /* Tutorials */,
 				D88304DC1B95F50D007ABDAC /* Files */,
 				D88304E91B95F533007ABDAC /* logo_white.png */,
@@ -276,7 +256,7 @@
 		D883049E1B95F3F8007ABDAC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = RevTwo;
 				TargetAttributes = {
 					D88304A51B95F3F8007ABDAC = {
@@ -468,6 +448,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -544,6 +525,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.revtwo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -564,6 +546,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.revtwo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "48bd21f5-cb5a-4ec5-b94f-a161a3c3596d";
 			};
@@ -583,6 +566,7 @@
 				);
 				INFOPLIST_FILE = RevTwoSampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.revtwo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RevTwoSample.app/RevTwoSample";
 			};
@@ -598,6 +582,7 @@
 				);
 				INFOPLIST_FILE = RevTwoSampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.revtwo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RevTwoSample.app/RevTwoSample";
 			};

@@ -6,6 +6,7 @@
  @copyright © 2009-2015 PubNub, Inc.
  */
 #import <Foundation/Foundation.h>
+#import "PNStructures.h"
 
 
 #ifndef PNConstants_h
@@ -14,16 +15,17 @@
 #pragma mark General information constants
 
 // Stores client library version number
-static NSString * const kPNLibraryVersion = @"4.0.3";
+static NSString * const kPNLibraryVersion = @"4.2.7";
 
 // Stores information about SDK codebase
-static NSString * const kPNBranchName = @"master";
-static NSString * const kPNCommit = @"a9c8c4648958b86cac4b59f7092cc6ed06dd7626";
+static NSString * const kPNCommit = @"ad5d8a3e2ec72907ed8201fc7e056e986c5a2f5c";
 
-#if __IPHONE_OS_VERSION_MIN_REQUIRED
-static NSString * const kPNClientName = @"ObjC-iOS";
+#if TARGET_OS_WATCH
+    static NSString * const kPNClientName = @"ObjC-watchOS";
+#elif __IPHONE_OS_VERSION_MIN_REQUIRED
+    static NSString * const kPNClientName = @"ObjC-iOS";
 #elif __MAC_OS_X_VERSION_MIN_REQUIRED
-static NSString * const kPNClientName = @"ObjC-MacOS";
+    static NSString * const kPNClientName = @"ObjC-MacOS";
 #endif // __MAC_OS_X_VERSION_MIN_REQUIRED
 
 
@@ -35,6 +37,7 @@ static NSTimeInterval const kPNDefaultSubscribeMaximumIdleTime = 310.0f;
 static NSTimeInterval const kPNDefaultNonSubscribeRequestTimeout = 10.0f;
 
 static BOOL const kPNDefaultIsTLSEnabled = YES;
+static PNHeartbeatNotificationOptions const kPNDefaultHeartbeatNotificationOptions = PNHeartbeatNotifyFailure;
 static BOOL const kPNDefaultShouldKeepTimeTokenOnListChange = YES;
 static BOOL const kPNDefaultShouldRestoreSubscription = YES;
 static BOOL const kPNDefaultShouldTryCatchUpOnSubscriptionRestore = YES;

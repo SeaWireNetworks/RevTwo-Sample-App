@@ -4,6 +4,11 @@
  @copyright © 2009-2015 PubNub, Inc.
  */
 #import "PNNetwork.h"
+#if TARGET_OS_WATCH
+    #import <WatchKit/WatchKit.h>
+#elif __IPHONE_OS_VERSION_MIN_REQUIRED
+    #import <UIKit/UIKit.h>
+#endif // __IPHONE_OS_VERSION_MIN_REQUIRED
 #import "PNNetworkResponseSerializer.h"
 #import "PNConfiguration+Private.h"
 #import "PNRequestParameters.h"
@@ -16,6 +21,7 @@
 #import "PNErrorParser.h"
 #import "PNURLBuilder.h"
 #import "PNConstants.h"
+#import "PNLogMacro.h"
 #import "PNHelpers.h"
 
 
@@ -86,7 +92,7 @@ typedef void(^NSURLSessionDataTaskFailure)(NSURLSessionDataTask *task, NSError *
  
  @since 4.0
  */
-@property (nonatomic, readonly) PNConfiguration *configuration;
+@property (nonatomic, strong) PNConfiguration *configuration;
 
 /**
  @brief      Stores whether \b PubNub network manager configured for long-poll request processing or
@@ -194,7 +200,7 @@ typedef void(^NSURLSessionDataTaskFailure)(NSURLSessionDataTask *task, NSError *
  */
 - (instancetype)initForClient:(PubNub *)client requestTimeout:(NSTimeInterval)timeout
            maximumConnections:(NSInteger)maximumConnections longPoll:(BOOL)longPollEnabled
-                 workingQueue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
+                 workingQueue:(dispatch_queue_t)queue;
 
 
 #pragma mark - Request helper
@@ -207,7 +213,7 @@ typedef void(^NSURLSessionDataTaskFailure)(NSURLSessionDataTask *task, NSError *
  
  @since 4.0
  */
-- (void)appendRequierdParametersTo:(PNRequestParameters *)parameters;
+- (void)appendRequiredParametersTo:(PNRequestParameters *)parameters;
 
 /**
  @brief  Construct URL request suitable to send POST request (if required).
@@ -535,12 +541,12 @@ typedef void(^NSURLSessionDataTaskFailure)(NSURLSessionDataTask *task, NSError *
 
 #pragma mark - Request helper
 
-- (void)appendRequierdParametersTo:(PNRequestParameters *)parameters {
+- (void)appendRequiredParametersTo:(PNRequestParameters *)parameters {
     
     [parameters addPathComponents:@{@"{sub-key}": (self.configuration.subscribeKey?: @""),
                                     @"{pub-key}": (self.configuration.publishKey?: @"")}];
     [parameters addQueryParameters:@{@"uuid": (self.configuration.uuid?: @""),
-                                     @"deviceid": self.configuration.deviceID,
+                                     @"deviceid": (self.configuration.deviceID?: @""),
                                      @"pnsdk":[NSString stringWithFormat:@"PubNub-%@%%2F%@",
                                                kPNClientName, kPNLibraryVersion]}];
     if ([self.configuration.authKey length]) {
@@ -667,7 +673,7 @@ typedef void(^NSURLSessionDataTaskFailure)(NSURLSessionDataTask *task, NSError *
         [self cancelAllRequests];
     }
     
-    [self appendRequierdParametersTo:parameters];
+    [self appendRequiredParametersTo:parameters];
     // Silence static analyzer warnings.
     // Code is aware about this case and at the end will simply call on 'nil' object method.
     // In most cases if referenced object become 'nil' it mean what there is no more need in
@@ -677,8 +683,8 @@ typedef void(^NSURLSessionDataTaskFailure)(NSURLSessionDataTask *task, NSError *
     NSURL *requestURL = [PNURLBuilder URLForOperation:operationType withParameters:parameters];
     if (requestURL) {
         
-        DDLogRequest([[self class] ddLogLevel], @"<PubNub> %@ %@", ([data length] ? @"POST" : @"GET"),
-                     [requestURL absoluteString]);
+        DDLogRequest([[self class] ddLogLevel], @"<PubNub::Network> %@ %@",
+                     ([data length] ? @"POST" : @"GET"), [requestURL absoluteString]);
         
         __weak __typeof(self) weakSelf = self;
         [[self dataTaskWithRequest:[self requestWithURL:requestURL data:data]
@@ -736,7 +742,7 @@ typedef void(^NSURLSessionDataTaskFailure)(NSURLSessionDataTask *task, NSError *
             #pragma clang diagnostic pop
         }
     };
-
+    
     if (![parser requireAdditionalData]) {
         
         parseCompletion([parser parsedServiceResponse:data]);
@@ -775,6 +781,14 @@ typedef void(^NSURLSessionDataTaskFailure)(NSURLSessionDataTask *task, NSError *
     }];
 }
 
+- (void)invalidate {
+    
+    OSSpinLockLock(&_lock);
+    [_session invalidateAndCancel];
+    _session = nil;
+    OSSpinLockUnlock(&self->_lock);
+}
+
 
 #pragma mark - Operation information
 
@@ -782,7 +796,7 @@ typedef void(^NSURLSessionDataTaskFailure)(NSURLSessionDataTask *task, NSError *
                      withParameters:(PNRequestParameters *)parameters data:(NSData *)data {
     
     NSInteger size = -1;
-    [self appendRequierdParametersTo:parameters];
+    [self appendRequiredParametersTo:parameters];
     NSURL *requestURL = [PNURLBuilder URLForOperation:operationType withParameters:parameters];
     if (requestURL) {
         
@@ -814,6 +828,7 @@ typedef void(^NSURLSessionDataTaskFailure)(NSURLSessionDataTask *task, NSError *
     // to same host (basically how many requests can be handled at once).
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
     configuration.requestCachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
+    configuration.URLCache = nil;
     configuration.HTTPShouldUsePipelining = !self.forLongPollRequests;
     configuration.HTTPAdditionalHeaders = _additionalHeaders;
     configuration.timeoutIntervalForRequest = timeout;
@@ -848,8 +863,9 @@ typedef void(^NSURLSessionDataTaskFailure)(NSURLSessionDataTask *task, NSError *
 - (NSDictionary *)defaultHeaders {
     
     NSString *device = @"iPhone";
-#if __IPHONE_OS_VERSION_MIN_REQUIRED
-    device = [[UIDevice currentDevice] model];
+#if TARGET_OS_WATCH
+    NSString *osVersion = [[WKInterfaceDevice currentDevice] systemVersion];
+#elif __IPHONE_OS_VERSION_MIN_REQUIRED
     NSString *osVersion = [[UIDevice currentDevice] systemVersion];
 #elif __MAC_OS_X_VERSION_MIN_REQUIRED
     NSOperatingSystemVersion version = [[NSProcessInfo processInfo]operatingSystemVersion];
@@ -872,11 +888,14 @@ typedef void(^NSURLSessionDataTaskFailure)(NSURLSessionDataTask *task, NSError *
 
 -(void)URLSession:(NSURLSession *)session didBecomeInvalidWithError:(NSError *)error {
     
-    OSSpinLockLock(&_lock);
-    // Replace invalidated session with new one which can be used for next requests.
-    [self prepareSessionWithRequesrTimeout:self.requestTimeout
-                        maximumConnections:self.maximumConnections];
-    OSSpinLockUnlock(&_lock);
+    if (error) {
+        
+        OSSpinLockLock(&_lock);
+        // Replace invalidated session with new one which can be used for next requests.
+        [self prepareSessionWithRequesrTimeout:self.requestTimeout
+                            maximumConnections:self.maximumConnections];
+        OSSpinLockUnlock(&_lock);
+    }
 }
 
 - (void)handleData:(NSData *)data loadedWithTask:(NSURLSessionDataTask *)task

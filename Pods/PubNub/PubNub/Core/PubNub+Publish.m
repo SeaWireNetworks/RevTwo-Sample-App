@@ -8,6 +8,7 @@
 #import "PubNub+CorePrivate.h"
 #import "PNStatus+Private.h"
 #import "PNConfiguration.h"
+#import "PNLogMacro.h"
 #import "PNHelpers.h"
 #import "PNAES.h"
 
@@ -176,9 +177,9 @@
             publishData = (compressedBody?: [@"" dataUsingEncoding:NSUTF8StringEncoding]);
         }
         
-        DDLogAPICall([[self class] ddLogLevel], @"<PubNub> Publish%@ message to '%@' channel%@%@",
-                     (compressed ? @" compressed" : @""), (channel?: @"<error>"),
-                     (!shouldStore ? @" which won't be saved in hisotry" : @""),
+        DDLogAPICall([[self class] ddLogLevel], @"<PubNub::API> Publish%@ message to '%@' "
+                     "channel%@%@", (compressed ? @" compressed" : @""), (channel?: @"<error>"),
+                     (!shouldStore ? @" which won't be saved in history" : @""),
                      (!compressed ? [NSString stringWithFormat:@": %@",
                                      (messageForPublish?: @"<error>")] : @"."));
 
@@ -191,6 +192,14 @@
            // it and probably whole client instance has been deallocated.
            #pragma clang diagnostic push
            #pragma clang diagnostic ignored "-Wreceiver-is-weak"
+           if (status.isError) {
+                
+               status.retryBlock = ^{
+                   
+                   [weakSelf publish:message toChannel:channel mobilePushPayload:payloads
+                      storeInHistory:shouldStore compressed:compressed withCompletion:block];
+               };
+           }
            [weakSelf callBlock:block status:YES withResult:nil andStatus:status];
            #pragma clang diagnostic pop
        }];

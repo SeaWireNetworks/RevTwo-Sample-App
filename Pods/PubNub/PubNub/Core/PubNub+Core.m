@@ -4,8 +4,21 @@
  @copyright © 2009-2015 PubNub, Inc.
  */
 #import "PubNub+CorePrivate.h"
+#define PN_CORE_PROTOCOLS PNObjectEventListener
+
+// Fabric
+#ifdef FABRIC_SUPPORT
+    #import "FABKitProtocol.h"
+    #undef PN_CORE_PROTOCOLS
+    #define PN_CORE_PROTOCOLS PNObjectEventListener, FABKit
+#endif
+
+#if __IPHONE_OS_VERSION_MIN_REQUIRED && !TARGET_OS_WATCH
+    #import <UIKit/UIKit.h>
+#endif // __IPHONE_OS_VERSION_MIN_REQUIRED
 #import "PubNub+SubscribePrivate.h"
 #import "PNObjectEventListener.h"
+#import "PNClientInformation.h"
 #import "PNRequestParameters.h"
 #import "PNSubscribeStatus.h"
 #import "PNResult+Private.h"
@@ -13,6 +26,7 @@
 #import "PNConfiguration.h"
 #import "PNReachability.h"
 #import "PNConstants.h"
+#import "PNLogMacro.h"
 #import "PNNetwork.h"
 #import "PNHelpers.h"
 
@@ -38,10 +52,26 @@ void pn_dispatch_async(dispatch_queue_t queue, dispatch_block_t block) {
     }
 }
 
+void pn_safe_property_read(dispatch_queue_t queue, dispatch_block_t block) {
+    
+    if (queue && block) {
+        
+        dispatch_sync(queue, block);
+    }
+}
+
+void pn_safe_property_write(dispatch_queue_t queue, dispatch_block_t block) {
+    
+    if (queue && block) {
+        
+        dispatch_barrier_async(queue, block);
+    }
+}
+
 
 #pragma mark - Protected interface declaration
 
-@interface PubNub () <PNObjectEventListener>
+@interface PubNub () <PN_CORE_PROTOCOLS>
 
 
 #pragma mark - Properties
@@ -97,7 +127,7 @@ void pn_dispatch_async(dispatch_queue_t queue, dispatch_block_t block) {
  @since 4.0
 */
 - (instancetype)initWithConfiguration:(PNConfiguration *)configuration
-                        callbackQueue:(dispatch_queue_t)callbackQueue NS_DESIGNATED_INITIALIZER;
+                        callbackQueue:(dispatch_queue_t)callbackQueue;
 
 
 #pragma mark - Reachability
@@ -157,6 +187,18 @@ void pn_dispatch_async(dispatch_queue_t queue, dispatch_block_t block) {
 
 #pragma mark - Information
 
++ (PNClientInformation *)information {
+
+    static PNClientInformation *_sharedClientInformation;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+        _sharedClientInformation = [PNClientInformation new];
+    });
+    
+    return _sharedClientInformation;
+}
+
 - (PNConfiguration *)currentConfiguration {
     
     return [self.configuration copy];
@@ -172,14 +214,14 @@ void pn_dispatch_async(dispatch_queue_t queue, dispatch_block_t block) {
 
 + (instancetype)clientWithConfiguration:(PNConfiguration *)configuration {
     
-    return [[self alloc] initWithConfiguration:configuration
-                                 callbackQueue:dispatch_get_main_queue()];
+    return [self clientWithConfiguration:configuration callbackQueue:nil];
 }
 
 + (instancetype)clientWithConfiguration:(PNConfiguration *)configuration
                           callbackQueue:(dispatch_queue_t)callbackQueue {
     
-    return [[self alloc] initWithConfiguration:configuration callbackQueue:callbackQueue];
+    return [[self alloc] initWithConfiguration:configuration
+                                 callbackQueue:(callbackQueue?: dispatch_get_main_queue())];
 }
 
 - (instancetype)initWithConfiguration:(PNConfiguration *)configuration
@@ -187,14 +229,9 @@ void pn_dispatch_async(dispatch_queue_t queue, dispatch_block_t block) {
     
     // Check whether initialization has been successful or not
     if ((self = [super init])) {
-#if DEBUG
-        [PNLog dumpToFile:YES];
-#else
-        [PNLog dumpToFile:NO];
-#endif
         
-        DDLogClientInfo([[self class] ddLogLevel], @"<PubNub> PubNub SDK %@ (%@ %@)",
-                        kPNLibraryVersion, kPNBranchName, kPNCommit);
+        DDLogClientInfo([[self class] ddLogLevel], @"<PubNub> PubNub SDK %@ (%@)",
+                        kPNLibraryVersion, kPNCommit);
         
         _configuration = [configuration copy];
         _callbackQueue = callbackQueue;
@@ -206,7 +243,13 @@ void pn_dispatch_async(dispatch_queue_t queue, dispatch_block_t block) {
         _heartbeatManager = [PNHeartbeat heartbeatForClient:self];
         [self addListener:self];
         [self prepareReachability];
-#if __IPHONE_OS_VERSION_MIN_REQUIRED
+#if TARGET_OS_WATCH
+        NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+        [notificationCenter addObserver:self selector:@selector(handleContextTransition:)
+                                   name:NSExtensionHostWillEnterForegroundNotification object:nil];
+        [notificationCenter addObserver:self selector:@selector(handleContextTransition:)
+                                   name:NSExtensionHostDidEnterBackgroundNotification object:nil];
+#elif __IPHONE_OS_VERSION_MIN_REQUIRED
         NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
         [notificationCenter addObserver:self selector:@selector(handleContextTransition:)
                                    name:UIApplicationWillEnterForegroundNotification object:nil];
@@ -295,6 +338,10 @@ void pn_dispatch_async(dispatch_queue_t queue, dispatch_block_t block) {
     // objects live feed or not.
     PNStatusCategory previousState = self.recentClientStatus;
     PNStatusCategory currentState = recentClientStatus;
+    if (currentState == PNReconnectedCategory) {
+        
+        currentState = PNConnectedCategory;
+    }
     
     // In case if client disconnected only from one of it's channels it should keep 'connected'
     // state.
@@ -329,6 +376,20 @@ void pn_dispatch_async(dispatch_queue_t queue, dispatch_block_t block) {
         }
     }
 }
+
+
+#pragma mark - Fabric support
+#ifdef FABRIC_SUPPORT
++ (NSString *)bundleIdentifier {
+    
+    return @"com.pubnub.pubnub-objc";
+}
+
++ (NSString *)kitDisplayVersion {
+    
+    return [self information].version;
+}
+#endif
 
 
 #pragma mark - Reachability
@@ -430,18 +491,21 @@ void pn_dispatch_async(dispatch_queue_t queue, dispatch_block_t block) {
     
     if (result) {
 
-        DDLogResult([[self class] ddLogLevel], @"<PubNub> %@", [result stringifiedRepresentation]);
+        DDLogResult([[self class] ddLogLevel], @"<PubNub> %@",
+                    [result stringifiedRepresentation]);
     }
     
     if (status) {
         
         if (status.isError) {
             
-            DDLogFailureStatus([[self class] ddLogLevel], @"<PubNub> %@", [status stringifiedRepresentation]);
+            DDLogFailureStatus([[self class] ddLogLevel], @"<PubNub> %@",
+                               [status stringifiedRepresentation]);
         }
         else {
             
-            DDLogStatus([[self class] ddLogLevel], @"<PubNub> %@", [status stringifiedRepresentation]);
+            DDLogStatus([[self class] ddLogLevel], @"<PubNub> %@",
+                        [status stringifiedRepresentation]);
         }
     }
 
@@ -463,8 +527,8 @@ void pn_dispatch_async(dispatch_queue_t queue, dispatch_block_t block) {
 
 - (void)client:(PubNub *)__unused client didReceiveStatus:(PNSubscribeStatus *)status {
     
-    if (status.category == PNConnectedCategory || status.category == PNDisconnectedCategory ||
-        status.category == PNUnexpectedDisconnectCategory) {
+    if (status.category == PNConnectedCategory || status.category == PNReconnectedCategory ||
+        status.category == PNDisconnectedCategory || status.category == PNUnexpectedDisconnectCategory) {
         
         self.recentClientStatus = status.category;
     }
@@ -474,8 +538,17 @@ void pn_dispatch_async(dispatch_queue_t queue, dispatch_block_t block) {
 #pragma mark - Handlers
 
 - (void)handleContextTransition:(NSNotification *)notification {
-    
-#if __IPHONE_OS_VERSION_MIN_REQUIRED
+
+#if TARGET_OS_WATCH
+    if ([notification.name isEqualToString:NSExtensionHostDidEnterBackgroundNotification]) {
+        
+        DDLogClientInfo([[self class] ddLogLevel], @"<PubNub> Did enter background execution context.");
+    }
+    else if ([notification.name isEqualToString:NSExtensionHostWillEnterForegroundNotification]) {
+        
+        DDLogClientInfo([[self class] ddLogLevel], @"<PubNub> Will enter foreground execution context.");
+    }
+#elif __IPHONE_OS_VERSION_MIN_REQUIRED
     if ([notification.name isEqualToString:UIApplicationDidEnterBackgroundNotification]) {
         
         DDLogClientInfo([[self class] ddLogLevel], @"<PubNub> Did enter background execution context.");
@@ -503,7 +576,13 @@ void pn_dispatch_async(dispatch_queue_t queue, dispatch_block_t block) {
 
 - (void)dealloc {
     
-#if __IPHONE_OS_VERSION_MIN_REQUIRED
+#if TARGET_OS_WATCH
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter removeObserver:self name:NSExtensionHostDidEnterBackgroundNotification
+                                object:nil];
+    [notificationCenter removeObserver:self name:NSExtensionHostWillEnterForegroundNotification
+                                object:nil];
+#elif __IPHONE_OS_VERSION_MIN_REQUIRED
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     [notificationCenter removeObserver:self name:UIApplicationWillEnterForegroundNotification
                                 object:nil];
@@ -518,6 +597,10 @@ void pn_dispatch_async(dispatch_queue_t queue, dispatch_block_t block) {
     [notificationCenter removeObserver:self name:NSWorkspaceSessionDidBecomeActiveNotification
                                 object:nil];
 #endif
+    [_subscriptionNetwork invalidate];
+    _subscriptionNetwork = nil;
+    [_serviceNetwork invalidate];
+    _serviceNetwork = nil;
 }
 
 #pragma mark -

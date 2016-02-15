@@ -7,6 +7,7 @@
 //
 
 #import "TutorialTableViewController.h"
+#import "R2CommunityCallViewController.h"
 
 @interface TutorialTableViewController ()
 
@@ -26,7 +27,8 @@
                       @"File Browsing",
                       @"SQLite Database",
                       //@"Chat",
-                      @"Create New Ticket", nil];
+                      @"Create New Ticket",
+                      nil];
     self.pickedTutorial = NO;
     
     
@@ -100,7 +102,7 @@
         //newTicket
         else if ([tutorial isEqualToString:@"Create New Ticket"]){
             R2NewTicketViewController *vc = [[R2NewTicketViewController alloc]init];
-            [self.navigationController pushViewController:vc animated:YES];
+            [self presentViewController:vc animated:YES completion:^{}];
             
         }
     }

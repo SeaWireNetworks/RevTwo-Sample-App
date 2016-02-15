@@ -63,12 +63,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 PubNub Real-time Cloud-Hosted Push API and Push Notification Client Frameworks
-Copyright (c) 2013 PubNub Inc.
+Copyright (c) 2014 PubNub Inc.
 http://www.pubnub.com/
 http://www.pubnub.com/terms
 </string>
 			<key>Title</key>
 			<string>PubNub</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string></string>
+			<key>Title</key>
+			<string>RevTwo</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>

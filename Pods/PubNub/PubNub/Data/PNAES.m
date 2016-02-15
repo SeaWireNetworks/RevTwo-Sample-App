@@ -9,6 +9,7 @@
 #import "PubNub+CorePrivate.h"
 #import <libkern/OSAtomic.h>
 #import "PNErrorCodes.h"
+#import "PNLogMacro.h"
 #import "PNHelpers.h"
 
 
@@ -19,7 +20,7 @@
  
  @since 4.0
  */
-static DDLogLevel ddLogLevel = (DDLogLevel)PNAESErrorLogLevel;
+static DDLogLevel ddLogLevel = (NSUInteger)PNAESErrorLogLevel;
 
 
 #pragma mark - Static
@@ -159,7 +160,7 @@ static const void * kPNAESInitializationVector = "0123456789012345";
         }
         else {
             
-            DDLogAESError([self ddLogLevel], @"<PubNub> Encryption error: %@", encryptionError);
+            DDLogAESError([self ddLogLevel], @"<PubNub::AES> Encryption error: %@", encryptionError);
         }
     }
     
@@ -237,7 +238,7 @@ static const void * kPNAESInitializationVector = "0123456789012345";
         }
         else {
             
-            DDLogAESError([self ddLogLevel], @"<PubNub> Decryption error: %@", decryptionError);
+            DDLogAESError([self ddLogLevel], @"<PubNub::AES> Decryption error: %@", decryptionError);
         }
     }
     

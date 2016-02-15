@@ -14,6 +14,7 @@
  */
 @interface PNStatus : PNResult
 
+
 ///------------------------------------------------
 /// @name Information
 ///------------------------------------------------
@@ -48,6 +49,14 @@
  @since 4.0
  */
 @property (nonatomic, readonly, assign, getter = willAutomaticallyRetry) BOOL automaticallyRetry;
+
+/**
+ @brief  Stringified \c category value.
+ 
+ @return Stringified representation for \c category property which store value from
+         \b PNStatusCategory.
+ */
+- (NSString *)stringifiedCategory;
 
 
 ///------------------------------------------------

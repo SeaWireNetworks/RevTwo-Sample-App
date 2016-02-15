@@ -11,6 +11,7 @@
 #import "FileBrowserViewController.h"
 #import "SQLiteBrowserViewController.h"
 #import "R2NewTicketViewController.h"
+#import "R2CommunityTableViewController.h"
 
 @interface TutorialTableViewController : UITableViewController
 
