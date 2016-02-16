@@ -3,40 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>SchemeUserState</key>
-	<dict>
-		<key>CocoaLumberjack.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-RevTwoSample.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>PubNub.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-	</dict>
+	<dict/>
 	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>12E2BC28C62976C425F4B71C2723F0B1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>92D39E37398BE7357FB1C306D86FDC36</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FF6366B6850AD1465AD5B58F1D39BE6B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-	</dict>
+	<dict/>
 </dict>
 </plist>

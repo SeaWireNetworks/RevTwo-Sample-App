@@ -8,4 +8,8 @@ This Sample App demonstrates many of the key features of the RevTwo In-App Suppo
 4. **File Browsing**:  The sample app includes several files in the app’s documents directory that can be viewed from the Web Portal.   The RevTwo library has built in support for file browsing as well as upload and download of files and does not require any special app integration to function.
 5. **SQLite Database Browsing**:  The sample app has built in database browsing.   Apps can have one or many SQLite databases within their app space. With the SQLite Database browser you can view tables, rows and fields from the Web UI.
 
-Download the sample app code and see our documentation to follow the full [tutorial](http://revtwo.com/docs/index.php/tutorials/)
+To use the sample app, you will need to:
+1. Download the RevTwo CocoaPod by running pod install on this project.
+2. Create an account on [revtwo.com](http://revtwo.com/) and add your api key to the sample app.
+
+see our [tutorial](http://revtwo.com/docs/index.php/tutorials/) for full instructions

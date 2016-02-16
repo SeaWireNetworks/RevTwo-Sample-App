@@ -18,6 +18,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     /////////////////////////////////////////////////////////////////////////////////
     //add your RevTwo product key and secret key here
+    //make sure you run pod install, see our docs for more info:
+    // http://revtwo.com/docs/index.php/tutorials/
     /////////////////////////////////////////////////////////////////////////////////
     R2Initialize(@"ADD YOUR KEY HERE",@"ADD YOUR PRIVATE KEY HERE", R2MODE_DEVELOPMENT);
     
