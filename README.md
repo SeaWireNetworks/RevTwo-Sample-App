@@ -9,6 +9,7 @@ This Sample App demonstrates many of the key features of the RevTwo In-App Suppo
 5. **SQLite Database Browsing**:  The sample app has built in database browsing.   Apps can have one or many SQLite databases within their app space. With the SQLite Database browser you can view tables, rows and fields from the Web UI.
 
 To use the sample app, you will need to:
+
 1. Download the RevTwo CocoaPod by running pod install on this project.
 2. Create an account on [revtwo.com](http://revtwo.com/) and add your api key to the sample app.
 
