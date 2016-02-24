@@ -26,8 +26,8 @@
                       @"Logging",
                       @"File Browsing",
                       @"SQLite Database",
-                      //@"Chat",
                       @"Create New Ticket",
+                      @"Community",
                       nil];
     self.pickedTutorial = NO;
     
@@ -104,6 +104,11 @@
             R2NewTicketViewController *vc = [[R2NewTicketViewController alloc]init];
             [self presentViewController:vc animated:YES completion:^{}];
             
+        }
+        //community
+        else if ([tutorial isEqualToString:@"Community"]) {
+            R2CommunityTableViewController *vc = [[R2CommunityTableViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }
     
